@@ -1,13 +1,39 @@
 <p>hehehe</p>
 <nav>
-  <a routerLink="" routerLinkActive="active">Details</a>
-  <a routerLink="/customers" routerLinkActive="active">Customers</a>
+  <a routerLink="/dashboard" routerLinkActive="active">Details</a>
+  <a
+    routerLink="/customers"
+    routerLinkActive="active"
+    *ngIf="authService.isLoggedIn()"
+    >Customers</a
+  >
+  <a
+    routerLink="/customers/new"
+    routerLinkActive="active"
+    *ngIf="authService.isAdmin()"
+  >
+    Add Customers</a
+  >
+  <a
+    routerLink="/login"
+    routerLinkActive="active"
+    *ngIf="!authService.isLoggedIn()"
+    >Login</a
+  >
+  <a
+    routerLink="/signup"
+    routerLinkActive="active"
+    *ngIf="!authService.isLoggedIn()"
+    >SignUp</a
+  >
   <a routerLink="/customer/new" routerLinkActive="active">Logout</a>
-  <button (click)="onLogout()">Logout</button>
+  <button *ngIf="authService.isLoggedIn()" (click)="onLogout()">Logout</button>
 </nav>
+<hr />
 <div class="container">
   <router-outlet></router-outlet>
 </div>
 
-<!-- *ngIf="authService.isLoggedIn() -->
-<!-- *ngIf="authService.isLoggedIn() -->
+<!-- *ngIf="authService.isLoggedIn()" -->
+<!-- *ngIf="authService.isAdmin()" -->
+<!-- *ngIf="authService.isLoggedIn()" -->

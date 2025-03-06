@@ -1,0 +1,13 @@
+nav{
+    padding: 10px;
+    background-color: white;
+}
+nav a{
+    margin-right: 10px;
+    text-decoration: none;
+    color: #333;
+}
+button{
+    padding: 5px 10px;
+    cursor: pointer;
+}

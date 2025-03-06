@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from './service/auth.service';
 
 @Component({
@@ -7,9 +8,10 @@ import { AuthService } from './service/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Angular_Test2';
-  constructor(private authService:AuthService){}
+  isLoggedIn=false;
+
+  constructor(public authService:AuthService,private router:Router){}
   onLogout(){
-    // this.authService.logout();
+    this.authService.logout();
   }
 }

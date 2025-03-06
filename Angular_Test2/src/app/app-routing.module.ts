@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CustomerDetailsComponent } from './component/customer-details/customer-details.component';
 import { CustomerListComponent } from './component/customer-list/customer-list.component';
-import { FormComponent } from './component/form/form.component';
+import { FormComponent } from './component/CustomerForm/form.component';
 import { LoginComponent } from './component/login/login.component';
 import { SignupComponent } from './component/signup/signup.component';
 

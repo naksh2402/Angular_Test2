@@ -1,1 +1,24 @@
-<p>customer-list works!</p>
+<h2>Customer List</h2>
+<table border="1">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Address</th>
+      <th *ngIf="authService.isAdmin()">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let customer of customers">
+      <td>{{ customer.name }}</td>
+      <td>{{ customer.email }}</td>
+      <td>{{ customer.phone }}</td>
+      <td>{{ customer.address }}</td>
+      <td *ngIf="authService.isAdmin()">
+        <button (click)="deleteCustomer(customer.id)">Delete</button>
+        <a routerLink="'['/customer/edit',customer.id]">Edit</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

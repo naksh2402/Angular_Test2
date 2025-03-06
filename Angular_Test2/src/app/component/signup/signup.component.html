@@ -1,1 +1,21 @@
-<p>signup works!</p>
+<h2>SignUp</h2>
+<form #signupform="ngForm" (ngSubmit)="signup()">
+  <div>
+    <label for="email">Email :</label>
+    <input type="email" name="email" [(ngModel)]="email" email required />
+  </div>
+  <div>
+    <label for="password">Password :</label>
+    <input type="password" name="password" [(ngModel)]="password" required />
+  </div>
+  <!-- //Add roles  -->
+  <div>
+    <label>Role :</label>
+    <select name="role" id="role" [(ngModel)]="role" required>
+      <option value="user">User</option>
+      <option value="admin">Admin</option>
+    </select>
+  </div>
+  <button type="submit" [disabled]="!signupform.valid">Signup</button>
+</form>
+<p>Already have an Account?? <a routerLink="/login">Login ?</a></p>
