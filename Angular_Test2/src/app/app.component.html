@@ -3,8 +3,11 @@
   <a routerLink="" routerLinkActive="active">Details</a>
   <a routerLink="/customers" routerLinkActive="active">Customers</a>
   <a routerLink="/customer/new" routerLinkActive="active">Logout</a>
-  <button>Logout</button>
+  <button (click)="onLogout()">Logout</button>
 </nav>
 <div class="container">
   <router-outlet></router-outlet>
 </div>
+
+<!-- *ngIf="authService.isLoggedIn() -->
+<!-- *ngIf="authService.isLoggedIn() -->

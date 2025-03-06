@@ -4,14 +4,16 @@ import { CustomerDetailsComponent } from './component/customer-details/customer-
 import { CustomerListComponent } from './component/customer-list/customer-list.component';
 import { FormComponent } from './component/form/form.component';
 import { LoginComponent } from './component/login/login.component';
+import { SignupComponent } from './component/signup/signup.component';
 
 const routes: Routes = [
   {path:'',redirectTo:"/details",pathMatch:'full'},
   {path:'login',component:LoginComponent},
-  {path:'details',component:CustomerDetailsComponent},
+  {path:'signup',component:SignupComponent},
+  {path:'dashboard',component:CustomerDetailsComponent},
   {path:'customers',component:CustomerListComponent},
   {path:'customer/new',component:FormComponent},
-  {path:'customer/edit:id',component:FormComponent},
+  {path:'customer/edit/:id',component:FormComponent},
 ];
 
 @NgModule({
