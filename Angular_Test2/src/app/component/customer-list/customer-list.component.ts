@@ -1,6 +1,6 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CustomerService, Customer } from '../CustomerForm/customer.service';
 import { AuthService } from 'src/app/service/auth.service';
-import { Customer, CustomerService } from '../CustomerForm/customer.service';
 
 @Component({
   selector: 'app-customer-list',
@@ -8,17 +8,23 @@ import { Customer, CustomerService } from '../CustomerForm/customer.service';
   styleUrls: ['./customer-list.component.css']
 })
 export class CustomerListComponent implements OnInit {
-  customers:Customer[]=[];
-  constructor(public customerService:CustomerService,public authService:AuthService) { }
+  customers: Customer[] = [];
+
+  constructor(public customerService: CustomerService, public authService: AuthService) { }
 
   ngOnInit(): void {
-    this.customerService.getCustomers().subscribe(data=>this.customers=data);
+    this.customers = this.customerService.getCustomers();
   }
-  deleteCustomer(id:number){
-  if(confirm("Are you sure you want to delete this customer?")){
-    this.customerService.deleteCustomer(id).subscribe((data)=>{
-      this.customers=this.customers.filter((item)=>item.id!==id);
-    })
+
+  deleteCustomer(id: number) {
+  if (!this.authService.isAdmin()) {
+    alert('Only admins can delete customers!');
+    return;
+  }
+
+  if (confirm('Are you sure you want to delete this customer?')) {
+    this.customerService.deleteCustomer(id);
+    this.customers = this.customers.filter(item => item.id !== id);
   }
 }
 }

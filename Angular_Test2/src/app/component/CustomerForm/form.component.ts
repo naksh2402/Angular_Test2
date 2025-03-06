@@ -1,6 +1,6 @@
-import { Component ,OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Customer, CustomerService } from './customer.service';
+import { CustomerService, Customer } from '../CustomerForm/customer.service';
 
 @Component({
   selector: 'app-form',
@@ -8,31 +8,32 @@ import { Customer, CustomerService } from './customer.service';
   styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit {
-customer:Customer={id:0,name:"",email:"",phone:"",address:""}
-isEditMode=false;
+  customer: Customer = { id: 0, name: "", email: "", phone: "", address: "" };
+  isEditMode = false;
 
-constructor( private customerService:CustomerService,
-  private router:Router,
-  private route:ActivatedRoute){}
-ngOnInit(): void {
-    const id=this.route.snapshot.params['id'];
-    if(id){
-      this.isEditMode=true;
-      this.customerService.getCustomer(+id).subscribe((data)=>{
-        this.customer=data;
-      })
+  constructor(public customerService: CustomerService, public router: Router, private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    const id = this.route.snapshot.params['id'];
+    if (id) {
+      this.isEditMode = true;
+      const existingCustomer = this.customerService.getCustomer(+id);
+      if (existingCustomer) {
+        this.customer = existingCustomer;
+      }
     }
- }
-  onsubmit(form:any){
-    if(this.isEditMode){
-      this.customerService.updateCustomer(this.customer).subscribe((data)=>{
-        this.router.navigate(['customers']);
-      })
+  }
+
+  onSubmit(): void {
+    if (this.isEditMode) {
+      this.customerService.updateCustomer(this.customer);
+    } else {
+      this.customerService.addCustomer(this.customer);
     }
-      else{
-         this.customerService.addCustomer(this.customer).subscribe((data)=>{
-        this.router.navigate(['customers']);
-      })
-  } 
-}
+    this.router.navigate(['/customers']);
+  }
+
+  cancel(): void {
+    this.router.navigate(['/customers']);
+  }
 }

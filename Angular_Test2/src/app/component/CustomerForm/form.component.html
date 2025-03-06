@@ -1,22 +1,41 @@
-<p>{{ isEditMode ? "Edit" : "Add" }} Customer</p>
-<form #customerForm="ngForm" (ngSubmit)="onsubmit(customerForm)">
-  <div>
-    <label>Name :</label>
-    <input type="text" name="name" [(ngModel)]="customer.name" required />
-  </div>
-  <div>
-    <label>Email :</label>
-    <input type="email" name="email" [(ngModel)]="customer.email" required />
-  </div>
-  <div>
-    <label>Phone :</label>
-    <input type="text" name="phone" [(ngModel)]="customer.phone" required />
-  </div>
-  <div>
-    <label>Address :</label>
-    <input type="text" name="address" [(ngModel)]="customer.address" required />
-  </div>
-  <button type="submit" [disabled]="!customerForm.valid">
-    {{ isEditMode ? "Update" : "Add" }} Customer
-  </button>
+<h2>{{ isEditMode ? "Edit Customer" : "Add Customer" }}</h2>
+<form #customerForm="ngForm" (ngSubmit)="onSubmit()">
+  <label for="name">Name:</label>
+  <input
+    type="text"
+    id="name"
+    [(ngModel)]="customer.name"
+    name="name"
+    required
+  />
+
+  <label for="email">Email:</label>
+  <input
+    type="email"
+    id="email"
+    [(ngModel)]="customer.email"
+    name="email"
+    required
+  />
+
+  <label for="phone">Phone:</label>
+  <input
+    type="text"
+    id="phone"
+    [(ngModel)]="customer.phone"
+    name="phone"
+    required
+  />
+
+  <label for="address">Address:</label>
+  <input
+    type="text"
+    id="address"
+    [(ngModel)]="customer.address"
+    name="address"
+    required
+  />
+
+  <button type="submit">{{ isEditMode ? "Update" : "Add" }}</button>
+  <button type="button" (click)="cancel()">Cancel</button>
 </form>

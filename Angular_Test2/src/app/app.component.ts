@@ -8,10 +8,14 @@ import { AuthService } from './service/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  isLoggedIn=false;
+  constructor(private router: Router,public authService:AuthService) {}
 
-  constructor(public authService:AuthService,private router:Router){}
-  onLogout(){
-    this.authService.logout();
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('token');
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/auth']);
   }
 }

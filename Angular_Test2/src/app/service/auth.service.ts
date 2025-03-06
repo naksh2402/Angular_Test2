@@ -1,50 +1,66 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
+export interface User {
+  email: string;
+  password: string;
+  role: 'admin' | 'user';
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private usersKey = 'users';
+  private tokenKey = 'token';
+  private roleKey = 'role';
 
-  constructor(private router:Router) { }
-  signup(email:string,password:string,role:string):boolean{
-    let users=JSON.parse(localStorage.getItem('users')||'[]');
-   //user already exists
-    if(users.find((user:any)=>{
-      user.email===email
-    })){
-      return false;
-    }
-    users.push({email,password,role});
-    localStorage.setItem('users',JSON.stringify(users));
-    return true;
-}
-  login(email:string,password:string):boolean{
-    let users=JSON.parse(localStorage.getItem('users')||'[]');
-    // for loggin matchin the id and password with signup user
-    let user=users.find((data:any)=>{
-        data.email===email && data.password===password
-    })
+  constructor(private router: Router) {}
 
-    if(!user){
+  signUp(email: string, password: string, role: 'admin' | 'user'): boolean {
+    let users: User[] = JSON.parse(localStorage.getItem(this.usersKey) || '[]');
+
+    // Prevent duplicate emails
+    if (users.find(user => user.email === email)) {
+      alert('Email is already registered.');
       return false;
     }
 
-    localStorage.setItem('token','user-token');
-    localStorage.setItem('role',user.role);
+    // Save new user
+    users.push({ email, password, role });
+    localStorage.setItem(this.usersKey, JSON.stringify(users));
+
+    alert('Signup successful! Please log in.');
+    this.router.navigate(['/auth']);
     return true;
   }
 
-  logout(){
-    localStorage.removeItem('token');
-    localStorage.removeItem('role');
-    this.router.navigate(['/login']);
+  login(email: string, password: string): boolean {
+    let users: User[] = JSON.parse(localStorage.getItem(this.usersKey) || '[]');
+    const user = users.find(u => u.email === email && u.password === password);
+
+    if (user) {
+      localStorage.setItem(this.tokenKey, 'auth_token');
+      localStorage.setItem(this.roleKey, user.role);
+      this.router.navigate(['/customers']);
+      return true;
+    }
+
+    alert('Invalid email or password!');
+    return false;
   }
 
-  isAdmin():boolean{
-    return localStorage.getItem('role')==='admin';
+  logout(): void {
+    localStorage.removeItem(this.tokenKey);
+    localStorage.removeItem(this.roleKey);
+    this.router.navigate(['/auth']);
   }
-  isLoggedIn():boolean{
-    return localStorage.getItem('token')?true:false;
+
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem(this.tokenKey);
+  }
+
+  isAdmin(): boolean {
+    return localStorage.getItem(this.roleKey) === 'admin';
   }
 }

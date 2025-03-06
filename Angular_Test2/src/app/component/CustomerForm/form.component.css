@@ -1,0 +1,57 @@
+.customer-form-container {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.customer-form-container h2 {
+    text-align: center;
+    color: #333;
+}
+
+.customer-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.customer-form label {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.customer-form input {
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.form-buttons button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submit-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.cancel-btn {
+    background-color: #6c757d;
+    color: white;
+}
+
+.form-buttons button:hover {
+    opacity: 0.8;
+}

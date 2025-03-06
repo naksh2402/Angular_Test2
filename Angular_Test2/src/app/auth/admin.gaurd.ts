@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
-import {  CanActivate, Router } from '@angular/router';
-import { AuthService } from '../service/auth.service';
+import { CanActivate, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthAdmin implements CanActivate{
+export class AdminGuard implements CanActivate {
+  constructor(private router: Router) {}
 
-  constructor(private router:Router,private authService:AuthService) { }
-  canActivate(): boolean{
-      if(this.authService.isAdmin()){
-        return true;
-      }
-      this.router.navigate(['/dashboard']);
-      return false;
+  canActivate(): boolean {
+    const userRole = localStorage.getItem('role'); 
+    if (userRole === 'admin') {
+       // Admin access granted
+      return true;
+    }
+    alert('Access Denied: Admins only!');
+    this.router.navigate(['/customers']);
+    return false;
   }
 }

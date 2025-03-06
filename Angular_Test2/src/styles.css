@@ -1,1 +1,54 @@
-/* You can add global styles to this file, and also import other style files */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+
+button {
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.primary-btn {
+    background: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+}
+
+.primary-btn:hover {
+    background: #0056b3;
+}
+
+.danger-btn {
+    background: #dc3545;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+}
+
+.danger-btn:hover {
+    background: #b02a37;
+}
+
+.container {
+    max-width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        max-width: 95%;
+        padding: 15px;
+    }
+}
