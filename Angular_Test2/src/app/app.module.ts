@@ -9,7 +9,9 @@ import { CustomerListComponent } from './component/customer-list/customer-list.c
 import { CustomerDetailsComponent } from './component/customer-details/customer-details.component';
 import { SignupComponent } from './component/signup/signup.component';
 import { FormsModule } from '@angular/forms';
-
+import {  HttpClientModule } from '@angular/common/http';
+// import {InmemoryDataService} from './in-memory-data.service';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +24,9 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
+    // HttpClientInMemoryWebApiModule.forRoot(InmemoryDataService,{dataEncapsulation:false}),
   ],
   providers: [],
   bootstrap: [AppComponent]

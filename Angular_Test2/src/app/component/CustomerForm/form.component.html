@@ -1,4 +1,22 @@
-<p>form works!</p>
-<form>
-  <input type="text" email name="email" id="email" required />
+<p>{{ isEditMode ? "Edit" : "Add" }} Customer</p>
+<form #customerForm="ngForm" (ngSubmit)="onsubmit(customerForm)">
+  <div>
+    <label>Name :</label>
+    <input type="text" name="name" [(ngModel)]="customer.name" required />
+  </div>
+  <div>
+    <label>Email :</label>
+    <input type="email" name="email" [(ngModel)]="customer.email" required />
+  </div>
+  <div>
+    <label>Phone :</label>
+    <input type="text" name="phone" [(ngModel)]="customer.phone" required />
+  </div>
+  <div>
+    <label>Address :</label>
+    <input type="text" name="address" [(ngModel)]="customer.address" required />
+  </div>
+  <button type="submit" [disabled]="!customerForm.valid">
+    {{ isEditMode ? "Update" : "Add" }} Customer
+  </button>
 </form>
